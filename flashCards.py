@@ -1,19 +1,31 @@
-from glob import glob
-from itertools import count
-from flask import Flask
-from datetime import datetime
+from flask import Flask, render_template, abort,jsonify
+from model import db
 app = Flask(__name__)
 counter = 0
+
 @app.route('/')
 def welcome():
-    return 'welcome to flash cards application'
+    cards = db
+    return render_template('welcome.html', cards=cards)
 
-@app.route('/date')
-def date():
-    return 'this is datetime {}'.format(datetime.now())
+@app.route('/card/<int:index>')
+def cards(index):
+    try:
+        card = db[index]
+        return render_template('cards.html', card=card, index=index, sizeOfCards=len(db)-1)
+    except IndexError:
+        abort(404)
 
-@app.route('/count-views')
-def count_views():
-    global counter
-    counter = counter + 1
-    return "number of viewers are {}".format(counter)
+@app.route('/api/cards/list/')
+def cards_list():
+    cards = db
+    return jsonify(cards)
+
+@app.route('/api/card/<int:index>')
+def single_card(index):
+    try:
+        card = db[index]
+        return jsonify(card)
+    except IndexError:
+        abort(404)
+        

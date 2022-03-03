@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Hello world</h1>
+    <a href="/card/0"> cards </a>
+    <ul>
+        {% for card in cards %}
+            <li> <a href="{{url_for('cards', index=loop.index0)}}">{{ card.question }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
