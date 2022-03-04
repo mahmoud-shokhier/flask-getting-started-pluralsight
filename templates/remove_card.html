@@ -1,0 +1,14 @@
+{%extends 'base.html'%}
+{%block title %} Remove card {%endblock %}
+
+{%block content %}
+    <h1>Flash Card</h1>
+        question : {{card.question}}
+        answer : {{card.answer}}
+    <br/>
+        <form action="/remove_card/{{index}}" method="post">
+            <button type="submit">Submit</button>
+        </form>
+    <br/>
+    <a href="{{url_for('welcome')}}"> Home</a>
+{%endblock %}

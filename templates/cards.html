@@ -1,20 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>Cards</title>
-</head>
-    <body>
-        <h1>Flash Card</h1>
-        question : {{card.question}}
-        answer : {{card.answer}}
-        <br/>
-        {% if index<sizeOfCards %}
-            <a href="{{url_for('cards',index=index+1)}}"> next card</a>
-        {% else %}
-            <a href="{{url_for('cards', index=0)}}">Last card</a>
-        {% endif %}
-        <br/>
-        <a href="{{url_for('welcome')}}"> Home</a>
-    </body>
-</html>
+{%extends 'base.html'%}
+{%block title %} Card {%endblock %}
+{%block content %}
+    <h1>Flash Card</h1>
+    question : {{card.question}}
+    answer : {{card.answer}}
+    <br/>
+    {% if index<sizeOfCards %}
+        <a href="{{url_for('cards',index=index+1)}}"> next card</a>
+    {% else %}
+        <a href="{{url_for('cards', index=0)}}">Last card</a>
+    {% endif %}
+    <br/>
+    <a href="{{url_for('welcome')}}"> Home</a>
+{%endblock %}
